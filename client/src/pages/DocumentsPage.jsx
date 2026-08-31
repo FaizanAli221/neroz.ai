@@ -1,0 +1,13 @@
+import { FilePlus2, FileText, Trash2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import Shell from "../components/Shell.jsx";
+import { api } from "../api.js";
+
+export default function DocumentsPage() {
+  const [documents, setDocuments] = useState([]); const [form, setForm] = useState({ name: "", content: "" }); const [error, setError] = useState("");
+  async function load() { const data = await api("/documents"); setDocuments(data.documents); }
+  useEffect(() => { load().catch((caught) => setError(caught.message)); }, []);
+  async function add(event) { event.preventDefault(); setError(""); try { await api("/documents", { method: "POST", body: JSON.stringify({ ...form, mimeType: "text/plain" }) }); setForm({ name: "", content: "" }); await load(); } catch (caught) { setError(caught.message); } }
+  async function remove(id) { await api(`/documents/${id}`, { method: "DELETE" }); await load(); }
+  return <Shell><div className="page"><header className="page-header"><div><span className="eyebrow">Knowledge</span><h1>Documents</h1><p>Store source material alongside your workspace.</p></div></header>{error ? <div className="alert">{error}</div> : null}<section className="documents-grid"><form className="surface document-form" onSubmit={add}><span className="agent-icon"><FilePlus2 /></span><h2>Add a text document</h2><p className="muted">Paste notes, briefs, research, or reference material.</p><label><span>Name</span><input required value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="Product brief" /></label><label><span>Content</span><textarea required rows={10} value={form.content} onChange={(event) => setForm({ ...form, content: event.target.value })} placeholder="Paste document content…" /></label><button className="primary-button">Save document</button></form><section className="surface"><div className="section-title"><div><span className="eyebrow">Library</span><h2>{documents.length} documents</h2></div></div>{documents.length ? documents.map((document) => <div className="document-row" key={document.id}><span className="row-icon"><FileText /></span><div><strong>{document.name}</strong><small>{Number(document.sizeBytes).toLocaleString()} bytes · {new Date(document.createdAt).toLocaleDateString()}</small></div><button className="icon-button" aria-label={`Delete ${document.name}`} onClick={() => remove(document.id)}><Trash2 size={17} /></button></div>) : <div className="empty-state"><FileText /><h3>Your library is empty</h3><p>Add your first document to begin building context.</p></div>}</section></section></div></Shell>;
+}
