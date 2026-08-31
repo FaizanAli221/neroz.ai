@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./AuthContext.jsx";
 import Protected from "./components/Protected.jsx";
 import AdminProtected from "./components/AdminProtected.jsx";
@@ -15,7 +15,7 @@ const AdminPage = lazy(() => import("./pages/AdminPage.jsx"));
 const secure = (page) => <Protected>{page}</Protected>;
 
 export default function App() {
-  return <AuthProvider><BrowserRouter><Suspense fallback={<Loading />}><Routes>
+  return <AuthProvider><HashRouter><Suspense fallback={<Loading />}><Routes>
     <Route path="/login" element={<AuthPage />} />
     <Route path="/register" element={<AuthPage register />} />
     <Route path="/" element={secure(<ChatPage />)} />
@@ -24,5 +24,5 @@ export default function App() {
     <Route path="/documents" element={secure(<DocumentsPage />)} />
     <Route path="/settings" element={secure(<SettingsPage />)} />
     <Route path="/admin" element={<AdminProtected><AdminPage /></AdminProtected>} />
-  </Routes></Suspense></BrowserRouter></AuthProvider>;
+  </Routes></Suspense></HashRouter></AuthProvider>;
 }
