@@ -9,7 +9,7 @@
     "start": "node src/server.js",
     "build": "node --check src/server.js && node --check src/app.js && node --check src/routes.js",
     "lint": "eslint src tests",
-    "test": "vitest run --configLoader runner",
+    "test": "vitest run",
     "db:init": "node src/init-db.js"
   },
   "dependencies": {

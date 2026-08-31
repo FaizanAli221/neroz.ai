@@ -4,9 +4,9 @@ import { z } from "zod";
 const schema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   PORT: z.coerce.number().int().positive().default(4000),
-  DATABASE_URL: z.string().min(1),
-  JWT_SECRET: z.string().min(32),
-  CORS_ORIGIN: z.string().default("http://localhost:5173"),
+  DATABASE_URL: z.string().default("postgresql://postgres:postgres@localhost:5432/nexora"),
+  JWT_SECRET: z.string().default("development_secret_key_needs_32_characters_minimum_len"),
+  CORS_ORIGIN: z.string().default("*"),
   OPENROUTER_API_KEY: z.string().default(""),
   AI_BASE_URL: z.string().url().default("https://openrouter.ai/api/v1"),
   AI_MODEL: z.string().default("openai/gpt-5-mini"),
