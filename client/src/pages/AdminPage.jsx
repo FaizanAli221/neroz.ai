@@ -40,7 +40,7 @@ export default function AdminPage() {
   }
 
   async function removeUser(user) {
-    if (!window.confirm(`Delete ${user.name} and all of their Nexora data? This cannot be undone.`)) return;
+    if (!window.confirm(`Delete ${user.name} and all of their Vermex workspace data? This action is permanent.`)) return;
     setBusyId(user.id); setError("");
     try { await api(`/admin/users/${user.id}`, { method: "DELETE" }); await load(); }
     catch (requestError) { setError(requestError.message); }

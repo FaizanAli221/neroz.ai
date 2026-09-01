@@ -3,9 +3,9 @@ import { describe, expect, it } from "vitest";
 import Logo from "../src/components/Logo.jsx";
 
 describe("Logo", () => {
-  it("identifies Nexora and the product category", () => {
+  it("identifies Vermex AI and the product domain", () => {
     render(<Logo />);
-    expect(screen.getByText("Nexora AI")).toBeInTheDocument();
-    expect(screen.getByText(/multi-agent workspace/i)).toBeInTheDocument();
+    expect(screen.getByText("Vermex AI")).toBeInTheDocument();
+    expect(screen.getByText(/vermex\.ai/i)).toBeInTheDocument();
   });
 });

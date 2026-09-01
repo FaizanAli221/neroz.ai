@@ -1,12 +1,11 @@
-# Nexora-AI
+# Vermex AI (`vermex.ai`)
 
-Nexora AI is a clean, local-first multi-agent workspace rebuilt from zero with React, Express, and PostgreSQL.
+Vermex AI is an autonomous, multi-agent intelligence workspace built with React, Express, and PostgreSQL.
 
-## Live deployment
+## Live Deployments
 
-[Open Nexora AI on Vercel](https://nexora-ai-pi-indol.vercel.app)
-
-The production frontend is live. API-backed features require the server environment variables to be configured in Vercel.
+- **GitHub Pages (Portfolio)**: [https://faizanali221.github.io/neroz.ai/](https://faizanali221.github.io/neroz.ai/)
+- **Vercel**: Production deployment ready with serverless API.
 
 ## Features
 
