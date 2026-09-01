@@ -18,7 +18,7 @@ export default function Shell({ children }) {
       <div className="sidebar-head"><Logo /><button className="icon-button mobile-only" aria-label="Close navigation" onClick={() => setOpen(false)}><X /></button></div>
       <NavLink to="/" className="new-chat" onClick={() => setOpen(false)}><MessageSquarePlus size={18} /> New chat</NavLink>
       <nav>{visibleLinks.map(([to, label, Icon]) => <NavLink key={to} to={to} end={to === "/"} onClick={() => setOpen(false)} className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}>{createElement(Icon, { size: 18 })}<span>{label}</span></NavLink>)}</nav>
-      <div className="sidebar-user"><span className="avatar">{user?.name?.[0]?.toUpperCase()}</span><span className="user-copy"><strong>{user?.name}</strong><small>{user?.email}</small></span><button className="icon-button" aria-label="Sign out" onClick={signOut}><LogOut size={17} /></button></div>
+      <div className="sidebar-user"><span className="avatar">{user?.name?.[0]?.toUpperCase()}</span><span className="user-copy"><strong>{user?.name}</strong><small>{user?.isGuest ? "Demo Mode" : user?.email}</small></span><button className="icon-button" aria-label="Sign out" title={user?.isGuest ? "Exit Guest Mode" : "Sign out"} onClick={signOut}><LogOut size={16} /></button></div>
     </aside>
     {open ? <button className="backdrop" aria-label="Close navigation" onClick={() => setOpen(false)} /> : null}
     <main className="main-area">{children}</main>
