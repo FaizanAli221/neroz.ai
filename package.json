@@ -6,10 +6,10 @@
   "workspaces": ["client", "server"],
   "scripts": {
     "dev": "node scripts/dev.js",
-    "build": "npm run build -w client",
-    "build:client": "npm run build -w client",
+    "build": "npm run build -w client && node scripts/copy-dist.js",
+    "build:client": "npm run build -w client && node scripts/copy-dist.js",
     "build:server": "npm run build -w server",
-    "build:all": "npm run build -w server && npm run build -w client",
+    "build:all": "npm run build -w server && npm run build -w client && node scripts/copy-dist.js",
     "lint": "npm run lint -w server && npm run lint -w client",
     "test": "npm run test -w server && npm run test -w client",
     "db:init": "npm run db:init -w server"
